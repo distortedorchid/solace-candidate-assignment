@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 
+import { InferSelectModel } from "drizzle-orm";
+import { advocates } from "@/db/schema";
+
+type Advocate = InferSelectModel<typeof advocates>;
+type AdvocateList = Array<Advocate>;
+
 export default function Home() {
-  const [advocates, setAdvocates] = useState([]);
-  const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+  const [advocates, setAdvocates] = useState<AdvocateList>([]);
+  const [filteredAdvocates, setFilteredAdvocates] = useState<AdvocateList>([]);
 
   useEffect(() => {
     console.log("fetching advocates...");
