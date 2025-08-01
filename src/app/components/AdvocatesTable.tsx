@@ -1,9 +1,30 @@
+import { useMemo } from "react";
 import type { AdvocateList } from "../page";
 
-function AdvocatesTable(props: {
+function AdvocatesTable({
+  advocates,
+  searchTerm,
+}: {
   searchTerm?: string;
-  filteredAdvocates: AdvocateList;
+  advocates: AdvocateList;
 }) {
+  const advocatesList = useMemo(() => {
+    if (!searchTerm) {
+      return advocates;
+    }
+
+    return advocates.filter((advocate) => {
+      return (
+        advocate.firstName.includes(searchTerm) ||
+        advocate.lastName.includes(searchTerm) ||
+        advocate.city.includes(searchTerm) ||
+        advocate.degree.includes(searchTerm) ||
+        advocate.specialties.includes(searchTerm) ||
+        advocate.yearsOfExperience === parseInt(searchTerm)
+      );
+    });
+  }, [searchTerm, advocates]);
+
   return (
     <table>
       <thead>
@@ -18,7 +39,7 @@ function AdvocatesTable(props: {
         </tr>
       </thead>
       <tbody>
-        {props.filteredAdvocates.map((advocate) => {
+        {advocatesList.map((advocate) => {
           return (
             <tr key={advocate.id}>
               <td>{advocate.firstName}</td>
