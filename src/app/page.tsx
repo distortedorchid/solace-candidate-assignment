@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { InferSelectModel } from "drizzle-orm";
 import { advocates } from "@/db/schema";
@@ -9,6 +9,8 @@ type Advocate = InferSelectModel<typeof advocates>;
 type AdvocateList = Array<Advocate>;
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState<string>();
+
   const [advocates, setAdvocates] = useState<AdvocateList>([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState<AdvocateList>([]);
 
@@ -22,12 +24,14 @@ export default function Home() {
     });
   }, []);
 
-  const onChange = (e) => {
-    const searchTerm = e.target.value;
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
 
-    document.getElementById("search-term").innerHTML = searchTerm;
+    if (!searchTerm) {
+      setFilteredAdvocates(advocates);
+      return;
+    }
 
-    console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
       return (
         advocate.firstName.includes(searchTerm) ||
@@ -55,7 +59,7 @@ export default function Home() {
       <div>
         <p>Search</p>
         <p>
-          Searching for: <span id="search-term"></span>
+          Searching for: <span id="search-term">{searchTerm}</span>
         </p>
         <input style={{ border: "1px solid black" }} onChange={onChange} />
         <button onClick={onClick}>Reset Search</button>
