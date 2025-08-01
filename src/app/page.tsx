@@ -49,7 +49,7 @@ export default function Home() {
 
   const onClick = () => {
     console.log(advocates);
-    setFilteredAdvocates(advocates);
+    setSearchTerm(undefined);
   };
 
   return (
@@ -58,12 +58,15 @@ export default function Home() {
       <br />
       <br />
       <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span id="search-term">{searchTerm}</span>
-        </p>
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
+        <label htmlFor="searchBox">Search</label>
+        <input
+          id="searchBox"
+          type="search"
+          style={{ border: "1px solid black" }}
+          onChange={onChange}
+        />
         <button onClick={onClick}>Reset Search</button>
+        Searching for: <span>{searchTerm}</span>
       </div>
       <br />
       <br />
