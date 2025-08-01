@@ -4,9 +4,10 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import { InferSelectModel } from "drizzle-orm";
 import { advocates } from "@/db/schema";
+import { AdvocatesTable } from "./components/AdvocatesTable";
 
-type Advocate = InferSelectModel<typeof advocates>;
-type AdvocateList = Array<Advocate>;
+export type Advocate = InferSelectModel<typeof advocates>;
+export type AdvocateList = Array<Advocate>;
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>();
@@ -66,38 +67,7 @@ export default function Home() {
       </div>
       <br />
       <br />
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>City</th>
-            <th>Degree</th>
-            <th>Specialties</th>
-            <th>Years of Experience</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredAdvocates.map((advocate) => {
-            return (
-              <tr key={advocate.id}>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
-                <td>{advocate.city}</td>
-                <td>{advocate.degree}</td>
-                <td>
-                  {advocate.specialties.map((s, n) => (
-                    <div key={n}>{s}</div>
-                  ))}
-                </td>
-                <td>{advocate.yearsOfExperience}</td>
-                <td>{advocate.phoneNumber}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <AdvocatesTable {...{ searchTerm, filteredAdvocates }} />
     </main>
   );
 }
