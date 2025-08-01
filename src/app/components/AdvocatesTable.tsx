@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import type { AdvocateList } from "../page";
+import { AdvocateTableRow } from "./AdvocateTableRow";
 
 function AdvocatesTable({
   advocates,
@@ -39,23 +40,9 @@ function AdvocatesTable({
         </tr>
       </thead>
       <tbody>
-        {advocatesList.map((advocate) => {
-          return (
-            <tr key={advocate.id}>
-              <td>{advocate.firstName}</td>
-              <td>{advocate.lastName}</td>
-              <td>{advocate.city}</td>
-              <td>{advocate.degree}</td>
-              <td>
-                {advocate.specialties.map((s, n) => (
-                  <div key={n}>{s}</div>
-                ))}
-              </td>
-              <td>{advocate.yearsOfExperience}</td>
-              <td>{advocate.phoneNumber}</td>
-            </tr>
-          );
-        })}
+        {advocatesList.map((advocate) => (
+          <AdvocateTableRow {...{ advocate }} />
+        ))}
       </tbody>
     </table>
   );
