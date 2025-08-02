@@ -2,39 +2,92 @@ import db from "..";
 import { advocates } from "../schema";
 
 const specialties = [
-  "Bipolar",
-  "LGBTQ",
-  "Medication/Prescribing",
-  "Suicide History/Attempts",
-  "General Mental Health (anxiety, depression, stress, grief, life transitions)",
-  "Men's issues",
-  "Relationship Issues (family, friends, couple, etc)",
-  "Trauma & PTSD",
+  //Mental Health
+  "Anxiety",
+  "Depression",
+  "Grief",
+  "Stress",
+  "Life transitions",
+  "Suicidal ideation",
+  "Bipolar disorder",
   "Personality disorders",
-  "Personal growth",
-  "Substance use/abuse",
-  "Pediatrics",
-  "Women's issues (post-partum, infertility, family planning)",
-  "Chronic pain",
-  "Weight loss & nutrition",
-  "Eating disorders",
-  "Diabetic Diet and nutrition",
-  "Coaching (leadership, career, academic and wellness)",
-  "Life coaching",
-  "Obsessive-compulsive disorders",
-  "Neuropsychological evaluations & testing (ADHD testing)",
-  "Attention and Hyperactivity (ADHD)",
-  "Sleep issues",
-  "Schizophrenia and psychotic disorders",
+  "Obsessive-compulsive disorder (OCD)",
+  "Schizophrenia",
+  "Post-traumatic stress disorder (PTSD)",
+
+  //Neurodevelopmental & Cognitive
+  "ADHD",
   "Learning disorders",
+  "Cognitive assessments",
+  "Neuropsychological testing",
+
+  //Sleep & Chronic Conditions
+  "Sleep issues",
+  "Chronic pain",
+  "Weight management",
+  "Nutrition counseling",
+  "Diabetic nutrition",
+  "Eating disorders",
+
+  //Substance Use & Recovery
+  "Substance use",
+  "Substance abuse",
+  "Addiction recovery",
+
+  //Gender-Specific Care
+  "Women's health",
+  "Men's health",
+  "LGBTQ+ affirming care",
+
+  //Women's Health
+  "Post-partum support",
+  "Infertility counseling",
+  "Family planning",
+  "Domestic abuse recovery",
+
+  //Men's Health
+  "Emotional expression",
+  "Anger management",
+  "Fatherhood & parenting",
+  "Career stress",
+  "Relationship communication",
+
+  //LGBTQ+
+  "Coming out support",
+  "Gender identity",
+  "Sexual orientation",
+
+  //Relationships & Family
+  "Couples counseling",
+  "Family issues",
+  "Friendship difficulties",
+  "Divorce/separation support",
+  "Parenting support",
   "Domestic abuse",
+
+  //Pediatrics
+  "Behavioral issues",
+  "ADHD (children)",
+  "Family dynamics",
+  "School-related stress",
+
+  //Coaching & Personal Growth
+  "Life coaching",
+  "Career coaching",
+  "Leadership coaching",
+  "Academic performance",
+  "Goal setting & motivation",
+  "Personal growth",
+
+  //Medication Management
+  "Medication adherence",
+  "Psychiatric medication education",
+  "Prescription monitoring",
 ];
 
-const randomSpecialty = () => {
-  const random1 = Math.floor(Math.random() * 24);
-  const random2 = Math.floor(Math.random() * (24 - random1)) + random1 + 1;
-
-  return [random1, random2];
+const getRandomTags = (min = 2, max = 5) => {
+  const count = Math.floor(Math.random() * (max - min + 1)) + min;
+  return [...specialties].sort(() => 0.5 - Math.random()).slice(0, count);
 };
 
 const advocateData = [
@@ -43,7 +96,7 @@ const advocateData = [
     lastName: "Doe",
     city: "New York",
     degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 10,
     phoneNumber: 5551234567,
   },
@@ -52,7 +105,7 @@ const advocateData = [
     lastName: "Smith",
     city: "Los Angeles",
     degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 8,
     phoneNumber: 5559876543,
   },
@@ -61,7 +114,7 @@ const advocateData = [
     lastName: "Johnson",
     city: "Chicago",
     degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 5,
     phoneNumber: 5554567890,
   },
@@ -70,7 +123,7 @@ const advocateData = [
     lastName: "Brown",
     city: "Houston",
     degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 12,
     phoneNumber: 5556543210,
   },
@@ -79,7 +132,7 @@ const advocateData = [
     lastName: "Davis",
     city: "Phoenix",
     degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 7,
     phoneNumber: 5553210987,
   },
@@ -88,7 +141,8 @@ const advocateData = [
     lastName: "Martinez",
     city: "Philadelphia",
     degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
+
     yearsOfExperience: 9,
     phoneNumber: 5557890123,
   },
@@ -97,7 +151,7 @@ const advocateData = [
     lastName: "Taylor",
     city: "San Antonio",
     degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 11,
     phoneNumber: 5554561234,
   },
@@ -106,7 +160,7 @@ const advocateData = [
     lastName: "Harris",
     city: "San Diego",
     degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 6,
     phoneNumber: 5557896543,
   },
@@ -115,7 +169,7 @@ const advocateData = [
     lastName: "Clark",
     city: "Dallas",
     degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 4,
     phoneNumber: 5550123456,
   },
@@ -124,7 +178,7 @@ const advocateData = [
     lastName: "Lewis",
     city: "San Jose",
     degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 13,
     phoneNumber: 5553217654,
   },
@@ -133,7 +187,7 @@ const advocateData = [
     lastName: "Lee",
     city: "Austin",
     degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 10,
     phoneNumber: 5551238765,
   },
@@ -142,7 +196,7 @@ const advocateData = [
     lastName: "King",
     city: "Jacksonville",
     degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 5,
     phoneNumber: 5556540987,
   },
@@ -151,7 +205,7 @@ const advocateData = [
     lastName: "Green",
     city: "San Francisco",
     degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 14,
     phoneNumber: 5559873456,
   },
@@ -160,7 +214,7 @@ const advocateData = [
     lastName: "Walker",
     city: "Columbus",
     degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 9,
     phoneNumber: 5556781234,
   },
@@ -169,7 +223,7 @@ const advocateData = [
     lastName: "Hall",
     city: "Fort Worth",
     degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
+    specialties: getRandomTags(),
     yearsOfExperience: 3,
     phoneNumber: 5559872345,
   },
