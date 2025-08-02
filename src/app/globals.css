@@ -1,3 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "tailwindcss-react-aria-components";
+
+@theme {
+  /* Colors */
+  --color-default: #265b4e;
+  --color-opal-100: #e9eef0;
+  --color-opal-200: #d4e2dd;
+  --color-opal-300: #d4dde2;
+  --color-opal-400: #6d9486;
+
+  /* Shadows */
+  --shadow-inset-glass:
+    inset 0 20px 30px rgba(255, 255, 255, 1),
+    inset 0 0 7px rgba(255, 255, 255, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.5),
+    inset 0 -10px 40px rgba(38, 91, 78, 0.25),
+    0 10px 25px rgba(20, 20, 20, 0.2), 0 2px 10px rgba(30, 30, 30, 0.1);
+  --shadow-glass-button:
+    inset 0 20px 30px rgba(255, 255, 255, 1),
+    inset 0 0 7px rgba(255, 255, 255, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.5),
+    inset 0 -10px 40px rgba(38, 91, 78, 0.25), 0 1px 1px rgba(20, 20, 20, 0.15);
+  --shadow-floating-1:
+    0 10px 25px rgba(20, 20, 20, 0.2), 0 2px 10px rgba(30, 30, 30, 0.1);
+}
