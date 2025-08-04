@@ -1,6 +1,6 @@
-import db from "../../../db";
-import { advocates } from "@/db/schema";
-import { NextResponse } from "next/server";
+import db from '../../../db';
+import { advocates } from '@/db/schema';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const rawCities = await db
@@ -10,7 +10,7 @@ export async function GET() {
   // Wrap into objects with `key` and `label` for React Aria
   const cities = rawCities.map(({ city }, key) => ({
     key,
-    label: city,
+    title: city
   }));
 
   return NextResponse.json(cities);

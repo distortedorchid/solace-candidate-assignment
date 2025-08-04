@@ -1,14 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "tailwindcss-react-aria-components";
 
 @theme {
-  /* Colors */
-  --color-default: #265b4e;
-  --color-opal-100: #e9eef0;
-  --color-opal-200: #d4e2dd;
-  --color-opal-300: #d4dde2;
-  --color-opal-400: #6d9486;
-
   /* Shadows */
   --shadow-inset-glass:
     inset 0 20px 30px rgba(255, 255, 255, 1),
